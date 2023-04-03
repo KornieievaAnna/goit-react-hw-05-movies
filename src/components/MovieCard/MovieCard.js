@@ -1,6 +1,7 @@
 const MovieCard = ({ movie }) => {
   console.log(movie);
   const { poster_path, title, vote_average, overview, genres } = movie;
+
   const ImageUrl = '//image.tmdb.org/t/p/w500';
 
   console.log(poster_path);
@@ -22,5 +23,3 @@ const MovieCard = ({ movie }) => {
 };
 
 export default MovieCard;
-
-
