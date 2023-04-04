@@ -20,17 +20,19 @@ export async function getMovie(id) {
 }
 
 export async function getCredits(id) {
-  const { data } = await axios.get(`/movie/${id}/credits&language=en-US`);
+  const { data } = await axios.get(
+    `/movie/${id}/credits?language=en-US`
+  );
   console.log(data);
   return data.cast;
 }
 
 export async function getReviews(id) {
   const { data } = await axios.get(
-    `/movie/${id}/reviews&language=en-US&page=1`
+    `/movie/${id}/reviews?language=en-US&page=1`
   );
-  console.log(data);
-  return data;
+  console.log(data.results);
+  return data.results;
 }
 
 // ff340e70eb42d683311a67813670b4e7
@@ -42,9 +44,3 @@ export async function getSearch(query) {
 }
 
 
-// export const getSearch = async query => {
-//   const { data } = await axios.get(`
-// /search/movie?language=en-US&page=1&include_adult=false&query=${query}`);
-// console.log(data);
-//   return data.results;
-// };

@@ -3,12 +3,13 @@ import { getSearch } from 'service/api';
 import Notiflix from 'notiflix';
 import { useSearchParams } from 'react-router-dom';
 import MovieGallery from '../components/MovieGallery/MovieGallery';
+import { Loader } from 'components/Loader/Loader';
 
 // import { AiOutlineSearch } from 'react-icons/ai';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const searchTitle = searchParams.get('query');
@@ -21,7 +22,6 @@ const Movies = () => {
       }
       try {
         const movie = await getSearch(searchTitle);
-
         setMovies(movie);
       } catch (error) {
         console.log('error');
@@ -73,12 +73,16 @@ const Movies = () => {
           onChange={handleNameChange}
         />
       </form>
-      {movies.length > 0 && (
+      {/* {!movies && <p>Films not found</p>} */}
+      {loading && <Loader />}
+      {movies === 0 ? (
         <ul>
           {movies.map(movie => (
             <MovieGallery key={movie.id} movie={movie} />
           ))}
         </ul>
+      ) : (
+        <p>Films not found</p>
       )}
     </>
   );

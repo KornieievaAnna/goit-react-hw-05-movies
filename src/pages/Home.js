@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { getTrending } from 'service/api';
 import MovieGallery from '../components/MovieGallery/MovieGallery';
+import { Loader } from 'components/Loader/Loader';
 
 const Home = () => {
-  const [, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const Home = () => {
 
   return (
     <ul>
+      {loading && <Loader />}
       {movies.map(movie => (
         <MovieGallery key={movie.id} movie={movie} />
       ))}
