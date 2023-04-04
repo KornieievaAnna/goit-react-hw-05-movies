@@ -7,7 +7,7 @@ axios.defaults.params = {
   api_key: API_KEY,
 };
 
-export default async function getTrending() {
+export async function getTrending() {
   const { data } = await axios.get(`/trending/all/day`);
   console.log(data.results);
   return data.results;
@@ -34,3 +34,17 @@ export async function getReviews(id) {
 }
 
 // ff340e70eb42d683311a67813670b4e7
+
+export async function getSearch(query) {
+  const { data } = await axios.get(`/search/movie?query=${query}&page=1`);
+  console.log(data.results);
+  return data.results;
+}
+
+
+// export const getSearch = async query => {
+//   const { data } = await axios.get(`
+// /search/movie?language=en-US&page=1&include_adult=false&query=${query}`);
+// console.log(data);
+//   return data.results;
+// };

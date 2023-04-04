@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { getMovie } from 'service/api';
+import {getMovie} from 'service/api';
 import MovieCard from 'components/MovieCard/MovieCard';
 
 const MovieDetails = () => {

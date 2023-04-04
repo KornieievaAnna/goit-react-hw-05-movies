@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import getTrending from 'service/api';
+import { getTrending } from 'service/api';
 import MovieGallery from '../components/MovieGallery/MovieGallery';
 
 const Home = () => {
@@ -11,7 +11,6 @@ const Home = () => {
     const movieTrending = async () => {
       try {
         const movie = await getTrending();
-        console.log(movie.length);
         setMovies(movie);
       } catch (error) {
         console.log('error');
