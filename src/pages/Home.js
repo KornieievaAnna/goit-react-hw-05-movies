@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <ul>
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
       {movies.map(movie => (
         <MovieGallery key={movie.id} movie={movie} />
       ))}

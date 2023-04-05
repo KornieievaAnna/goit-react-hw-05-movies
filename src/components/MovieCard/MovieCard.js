@@ -1,12 +1,18 @@
-import { Link, Outlet } from 'react-router-dom';
+import { useLocation, Link, Outlet, NavLink } from 'react-router-dom';
+import { useRef, Suspense } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 const MovieCard = ({ movie }) => {
   const { poster_path, title, vote_average, overview, genres } = movie;
   const ImageUrl = '//image.tmdb.org/t/p/w500';
+  const location = useLocation();
+  const backLinkLocationRef = useRef(location.state?.from ?? '/movie');
 
   return (
     <div>
-      <button>go back</button>
+      <Link to={backLinkLocationRef.current}>
+        <button>Go back</button>
+      </Link>
       <div>
         <img src={ImageUrl + poster_path} alt={title} width={280} />
       </div>
@@ -22,14 +28,16 @@ const MovieCard = ({ movie }) => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to="cast">Cast</Link>
+            <NavLink to="cast">Cast</NavLink>
           </li>
           <li>
-            <Link to="review">Rreviews</Link>
+            <NavLink to="review">Rreviews</NavLink>
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

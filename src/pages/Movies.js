@@ -13,16 +13,22 @@ const Movies = () => {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const searchTitle = searchParams.get('query');
+  const [noFilms, setNoFilms] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     const movieTrending = async () => {
       if (!searchTitle) {
         return;
       }
+      setLoading(true);
       try {
         const movie = await getSearch(searchTitle);
         setMovies(movie);
+        if (movie.length === 0) {
+          setNoFilms(true);
+        } else {
+          setNoFilms(false);
+        }
       } catch (error) {
         console.log('error');
       } finally {
@@ -56,7 +62,6 @@ const Movies = () => {
     setQuery(name);
     setSearchParams({ query: query });
   };
-
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -73,16 +78,14 @@ const Movies = () => {
           onChange={handleNameChange}
         />
       </form>
-      {/* {!movies && <p>Films not found</p>} */}
       {loading && <Loader />}
-      {movies === 0 ? (
+      {noFilms && <p>Films not found</p>}
+      {movies.length > 0 && (
         <ul>
           {movies.map(movie => (
             <MovieGallery key={movie.id} movie={movie} />
           ))}
         </ul>
-      ) : (
-        <p>Films not found</p>
       )}
     </>
   );
