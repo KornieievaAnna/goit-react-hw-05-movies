@@ -1,15 +1,12 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getReviews } from 'service/api';
-import { Loader } from 'components/Loader/Loader';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState('');
   const { id } = useParams();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
     const castSearch = async () => {
       if (id) {
         try {
@@ -18,7 +15,6 @@ const Reviews = () => {
         } catch (error) {
           console.log('error');
         } finally {
-          setLoading(false);
         }
       }
       return;
@@ -28,7 +24,6 @@ const Reviews = () => {
 
   return (
     <>
-      {/* {loading && <Loader />} */}
       {reviews.length ? (
         <ul>
           {reviews.map(({ id, author, content }) => (
