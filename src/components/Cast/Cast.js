@@ -52,7 +52,7 @@ const Cast = () => {
                 />
               )}
               <Text>{name}</Text>
-              <Text>Character:{character}</Text>
+              <Text>Character: {character}</Text>
             </Card>
           ))}
         </ul>
