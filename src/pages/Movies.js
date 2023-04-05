@@ -5,6 +5,11 @@ import { useSearchParams } from 'react-router-dom';
 import MovieGallery from '../components/MovieGallery/MovieGallery';
 import { Loader } from 'components/Loader/Loader';
 
+import { GlowingBtn } from '../components/Layout/Layout.styled';
+import { Text } from '../components/Cast/Cast.styled';
+
+
+
 // import { AiOutlineSearch } from 'react-icons/ai';
 
 const Movies = () => {
@@ -65,9 +70,9 @@ const Movies = () => {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <button type="submit">
+        <GlowingBtn type="submit">
           <span>Search</span>
-        </button>
+        </GlowingBtn>
 
         <input
           type="text"
@@ -79,7 +84,7 @@ const Movies = () => {
         />
       </form>
       {loading && <Loader />}
-      {noFilms && <p>Films not found</p>}
+      {noFilms && <Text>Films not found 😭</Text>}
       {movies.length > 0 && (
         <ul>
           {movies.map(movie => (

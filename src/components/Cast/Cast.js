@@ -2,6 +2,8 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getCredits } from 'service/api';
 import ImageNotFound from './ImageNotFound.png';
+import { Card } from 'components/MovieGallery/MovieGallery.styled';
+import { Text } from './Cast.styled';
 
 const Cast = () => {
   const [casts, setCasts] = useState('');
@@ -29,13 +31,18 @@ const Cast = () => {
   }, [id]);
 
   return (
-    <>
+    <section>
       {casts.length > 0 && (
         <ul>
           {casts.map(({ id, character, name, profile_path }) => (
-            <li key={id}>
+            <Card key={id}>
               {profile_path ? (
-                <img src={ImageUrl + profile_path} alt={name} width={280} />
+                <img
+                  src={ImageUrl + profile_path}
+                  alt={name}
+                  width={280}
+                  height={420}
+                />
               ) : (
                 <img
                   src={ImageNotFound}
@@ -44,13 +51,13 @@ const Cast = () => {
                   height={420}
                 />
               )}
-              <p>{name}</p>
-              <p>Character:{character}</p>
-            </li>
+              <Text>{name}</Text>
+              <Text>Character:{character}</Text>
+            </Card>
           ))}
         </ul>
       )}
-    </>
+    </section>
   );
 };
 

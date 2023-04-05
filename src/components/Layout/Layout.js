@@ -1,19 +1,18 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Loader } from 'components/Loader/Loader';
+import { GlowingBtn } from './Layout.styled';
 
 const Layout = () => {
   return (
     <div>
       <header>
-        <ul>
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/movie">Movie</NavLink>
-          </li>
-        </ul>
+        <NavLink to="/">
+          <GlowingBtn>Home</GlowingBtn>
+        </NavLink>
+        <NavLink to="/movie">
+          <GlowingBtn>Movie</GlowingBtn>
+        </NavLink>
       </header>
       <main>
         <Suspense fallback={<Loader />}>

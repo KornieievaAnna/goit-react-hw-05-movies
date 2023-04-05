@@ -1,6 +1,9 @@
 import { useLocation, Link, Outlet, NavLink } from 'react-router-dom';
 import { useRef, Suspense } from 'react';
 import { Loader } from 'components/Loader/Loader';
+import { GlowingBtn } from '../Layout/Layout.styled';
+import { StyledSection } from 'components/MovieCard/MovieCard.styled';
+import { StyledBtn } from 'components/MovieCard/MovieCard.styled';
 
 const MovieCard = ({ movie }) => {
   const { poster_path, title, vote_average, overview, genres } = movie;
@@ -11,30 +14,34 @@ const MovieCard = ({ movie }) => {
   return (
     <div>
       <Link to={backLinkLocationRef.current}>
-        <button>Go back</button>
+        <GlowingBtn>Go back</GlowingBtn>
       </Link>
-      <div>
+      <StyledSection>
         <img src={ImageUrl + poster_path} alt={title} width={280} />
-      </div>
-      <div>
-        <h2>{title}</h2>
-        <p>User Score: {vote_average}</p>
-        <h3>Overview</h3>
-        <p>{overview}</p>
-        <h3>Genres</h3>
-        <p>{genres.map(ganre => ganre.name).join(', ')}</p>
-      </div>
-      <div>
-        <p>Additional information</p>
+        <div>
+          <h2>{title}</h2>
+          <p>User Score: {vote_average}</p>
+          <h3>Overview</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <p>{genres.map(ganre => ganre.name).join(', ')}</p>
+        </div>
+      </StyledSection>
+      <section>
+        <h3>Additional information</h3>
         <ul>
           <li>
-            <NavLink to="cast">Cast</NavLink>
+            <NavLink to="cast">
+              <StyledBtn>Cast</StyledBtn>
+            </NavLink>
           </li>
           <li>
-            <NavLink to="review">Rreviews</NavLink>
+            <NavLink to="review">
+              <StyledBtn>Rreviews</StyledBtn>
+            </NavLink>
           </li>
         </ul>
-      </div>
+      </section>
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
